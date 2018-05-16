@@ -21,10 +21,19 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Pastor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MartialStatus)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Gender)
@@ -42,7 +51,34 @@
             @Html.DisplayNameFor(model => model.EmergencyContactPhone)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DelegateType)
+            @Html.DisplayNameFor(model => model.Reguar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Guest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DelegateAtLarge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecialDelegate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Allergies)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Asthma)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Diabetes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vegetarian)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HighBloodPressure)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BronchialDisorder)
         </th>
         <th></th>
     </tr>
@@ -59,10 +95,19 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Pastor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MartialStatus)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Gender)
@@ -80,7 +125,34 @@
             @Html.DisplayFor(modelItem => item.EmergencyContactPhone)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DelegateType)
+            @Html.DisplayFor(modelItem => item.Reguar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Guest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DelegateAtLarge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecialDelegate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Allergies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asthma)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Diabetes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vegetarian)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HighBloodPressure)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BronchialDisorder)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
