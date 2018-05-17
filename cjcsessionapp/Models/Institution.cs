@@ -9,6 +9,11 @@ namespace cjcsessionapp.Models
 
     public class Institution
     {
+        public Institution()
+        {
+            SessionDelegate = new List<SessionDelegate>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -17,7 +22,6 @@ namespace cjcsessionapp.Models
 
         public int NumberOfDelegatesAssigned { get; set; }
         
-        public int DelegateId { get; set; }
         public virtual List<SessionDelegate> SessionDelegate { get; set; }
     }
 }

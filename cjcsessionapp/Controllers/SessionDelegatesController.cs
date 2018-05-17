@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using cjcsessionapp.Models;
 
@@ -47,6 +44,7 @@ namespace cjcsessionapp.Controllers
         // GET: SessionDelegates/Create
         public ActionResult Create()
         {
+            ViewBag.InstitutionList = new SelectList(db.Institutions, "Id", "Name").ToList();
             return View();
         }
 

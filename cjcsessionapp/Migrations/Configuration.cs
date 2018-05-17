@@ -18,6 +18,16 @@ namespace cjcsessionapp.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+
+            context.SessionDelegates.AddOrUpdate(x => x.Id,
+                new Models.SessionDelegate() { FirstName = "Damian", LastName = "Chambers", DelegateType = "Regular", InstitutionId = 1 },
+                new Models.SessionDelegate() { FirstName = "John", LastName = "Brown", DelegateType = "Regular", InstitutionId = 1 },
+                new Models.SessionDelegate() { FirstName = "Mary", LastName = "Jane", DelegateType = "Regular", InstitutionId = 2 }
+                );
+
+            context.Institutions.AddOrUpdate(c => c.Id,
+                new Models.Institution() { Name = "Spanish Town", NumberOfDelegatesAssigned = 5 },
+                new Models.Institution() { Name = "Mandeville", NumberOfDelegatesAssigned = 4 });
         }
     }
 }

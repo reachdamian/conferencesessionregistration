@@ -11,8 +11,7 @@ namespace cjcsessionapp.Models
     {
         [Key]
         public int Id { get; set; }
-
-        
+                
         [Required]
         [MaxLength(50)]
         [DisplayName("First Name")]
@@ -22,8 +21,7 @@ namespace cjcsessionapp.Models
         [MaxLength(50)]
         [DisplayName("Last Name")]
         public string LastName { get; set; }
-        public string Title { get; set; }
-        public string Pastor { get; set; }
+        public string Title { get; set; }        
         public string Address { get; set; }
         public string Email { get; set; }
         public string Age { get; set; }
