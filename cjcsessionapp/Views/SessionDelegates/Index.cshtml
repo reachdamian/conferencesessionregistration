@@ -36,7 +36,7 @@
             @Html.DisplayNameFor(model => model.MartialStatus)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Gender)
+            @Html.DropDownList("Gender",null, new{onchange="document.location.href='/Default/Index?value='+this.value;"})
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Telephone)
@@ -109,9 +109,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.MartialStatus)
         </td>
-        <td>
+        @**<td>
             @Html.DisplayFor(modelItem => item.Gender)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Telephone)
         </td>

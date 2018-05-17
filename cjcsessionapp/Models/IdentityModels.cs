@@ -27,6 +27,7 @@ namespace cjcsessionapp.Models
 
         public DbSet<SessionDelegate> SessionDelegates { get; set; }
         public DbSet<Institution> Institutions { get; set; }
+        public DbSet<Registered> Registered { get; set; }
 
         public static ApplicationDbContext Create()
         {

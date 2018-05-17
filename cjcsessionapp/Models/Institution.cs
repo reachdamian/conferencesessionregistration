@@ -18,6 +18,6 @@ namespace cjcsessionapp.Models
         public int NumberOfDelegatesAssigned { get; set; }
         
         public int DelegateId { get; set; }
-        public virtual SessionDelegate SessionDelegate { get; set; }
+        public virtual List<SessionDelegate> SessionDelegate { get; set; }
     }
 }

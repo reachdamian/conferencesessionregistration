@@ -31,7 +31,9 @@ namespace cjcsessionapp.Models
         [DisplayName("Marital Status")]
         public Boolean MartialStatus { get; set; }
 
-        [DisplayName ("Gender")] 
+        [DisplayName ("Gender")]
+        public string Gender { get; set; }
+
         public string Telephone { get; set; }
 
         [DisplayName("Require Housing?")]
@@ -45,16 +47,11 @@ namespace cjcsessionapp.Models
 
         [Required]
         [DisplayName("Delegate Of Type")]
-        public Boolean Reguar { get; set; }
-        public Boolean Guest { get; set; }
+        public string DelegateType { get; set; }
 
-        [DisplayName("Delegates At Large")]
-        public Boolean DelegateAtLarge { get; set; }
+        public int InstitutionId { get; set; }
+        public virtual Institution Institution { get; set; }
 
-        [DisplayName("Special Delegates")]
-        public Boolean SpecialDelegate { get; set; }
-
-        [DisplayName("Health-Related Condition")]
         public Boolean Allergies { get; set; }
         public Boolean Asthma { get; set; }
         public Boolean Diabetes { get; set; }
