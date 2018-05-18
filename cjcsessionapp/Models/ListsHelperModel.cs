@@ -55,5 +55,16 @@ namespace cjcsessionapp.Models
             };
             return items;
         }
+        public static IEnumerable<SelectListItem> GetAgeList()
+        {
+            List<SelectListItem> items = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text = "15-29", Value = "15-29" },
+                new SelectListItem() { Text = "30-44", Value = "Married" },
+                new SelectListItem() { Text = "45-55", Value = "56 and Over" },
+               
+            };
+            return items;
+        }
     }
 }
