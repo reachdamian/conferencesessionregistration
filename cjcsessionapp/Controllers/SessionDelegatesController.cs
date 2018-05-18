@@ -14,14 +14,7 @@ namespace cjcsessionapp.Controllers
         // GET: SessionDelegates
         public ActionResult Index()
         {
-            List<SelectListItem> items = new List<SelectListItem>();
-            SelectListItem item1 = new SelectListItem { Text = "Male", Value = "1", Selected = true };
-            SelectListItem item2 = new SelectListItem { Text = "Female", Value = "2", Selected = false };
-
-            items.Add(item1);
-            items.Add(item2);
-
-            ViewBag.Gender = items;
+            
 
             return View(db.SessionDelegates.ToList());
         }
@@ -53,7 +46,7 @@ namespace cjcsessionapp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Title,Pastor,Address,Email,Age,MartialStatus,Gender,Telephone,RequireHousing,EmergencyContactName,EmergencyContactPhone,Reguar,Guest,DelegateAtLarge,SpecialDelegate,Allergies,Asthma,Diabetes,Vegetarian,HighBloodPressure,BronchialDisorder")] SessionDelegate sessionDelegate)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Title,Type of Delegate, Institution")] SessionDelegate sessionDelegate)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +78,7 @@ namespace cjcsessionapp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Title,Pastor,Address,Email,Age,MartialStatus,Gender,Telephone,RequireHousing,EmergencyContactName,EmergencyContactPhone,Reguar,Guest,DelegateAtLarge,SpecialDelegate,Allergies,Asthma,Diabetes,Vegetarian,HighBloodPressure,BronchialDisorder")] SessionDelegate sessionDelegate)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Title,Type of Delegate, Institution")] SessionDelegate sessionDelegate)
         {
             if (ModelState.IsValid)
             {
