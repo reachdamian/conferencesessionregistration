@@ -16,7 +16,7 @@ namespace cjcsessionapp.Migrations
         {
             //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method v
             //  to avoid creating duplicate seed data.
 
             context.SessionDelegates.AddOrUpdate(x => x.Id,
