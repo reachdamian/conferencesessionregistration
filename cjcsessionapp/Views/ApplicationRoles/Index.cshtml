@@ -1,0 +1,51 @@
+﻿@model IEnumerable<cjcsessionapp.Models.ApplicationRole>
+@{
+    ViewBag.Title = "Roles";
+}
+
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h2 class="panel-title">ROLE MANAGEMENT - List of Roles</h2>
+            </div>
+            <div class="panel-body">
+
+                <p>
+                    @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-success" })
+                </p>
+                <table class="table table-striped table-bordered table-hover" id="sample_1">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+
+                            <td>
+                                <a href="@Url.Action("Edit", "ApplicationRoles", new { id = item.Id})" class="btn btn-default btn-sm"><i class="fa fa-edit"></i></a>
+                                <a href="@Url.Action("Details", "ApplicationRoles", new { id = item.Id})" class="btn btn-default btn-sm"><i class="fa fa-list"></i></a>
+                                <a href="@Url.Action("Delete", "ApplicationRoles", new { id = item.Id})" class="btn btn-default btn-sm"><i class="fa fa-close"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+    @section scripts {
+
+        
+    }
+

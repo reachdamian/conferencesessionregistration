@@ -3,43 +3,175 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title - CJC Conference Session Registration App</title>
+
+    <meta name="description" content="" />
+    <meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
+
+    <!-- mobile settings -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <!-- WEB FONTS : use %7C instead of | (pipe) -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
+
+    <link href="~/assets/css/fontawesome-all.min.css" rel="stylesheet" />
+
+    <!-- CORE CSS -->
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- THEME CSS -->
+    <link href="~/assets/css/essentials.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/layout.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/assets/css/layout-datatables.css" rel="stylesheet" type="text/css" />
+
+    <!-- PAGE LEVEL SCRIPTS -->
+    <link href="~/assets/css/header-1.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/color_scheme/darkblue.css" rel="stylesheet" type="text/css" id="color_scheme" />
 
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+<body class="smoothscroll enable-animation">
+    @Html.Partial("_LoginPartial")
+    <div id="header" class="sticky clearfix">
+
+        <!-- TOP NAV -->
+        <header id="topNav">
+            <div class="container">
+
+                <!-- Mobile Menu Button -->
+                <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+                    <i class="fa fa-bars"></i>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                <!-- Logo -->
+                <a class="logo pull-left" href="index.html">
+                    <img src="~/assets/images/_smarty/logo_light.png" alt="" /> <!-- light logo -->
+                    <img src="~/assets/images/_smarty/logo_dark.png" alt="" /> <!-- dark logo -->
+                </a>
+
+                <!--
+                    Top Nav
+
+                    AVAILABLE CLASSES:
+                    submenu-dark = dark sub menu
+                -->
+                <div class="navbar-collapse pull-right nav-main-collapse collapse">
+                    <nav class="nav-main">
+
+                        <ul id="topMain" class="nav nav-pills nav-main">
+                            <li class="active">
+                                <!-- HOME -->
+                                <a class="dropdown-toggle" href="#">
+                                    HOME
+                                </a>
+                            </li>
+                            <li class="dropdown">@Html.ActionLink("About", "About", "Home")</li>
+                            <li class="dropdown">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">@Html.ActionLink("Delegates", "Index", "SessionDelegates")</li>
+                        </ul>
+                    </nav>
+                </div>
+
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
+        </header>
+        <!-- /Top Nav -->
     </div>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        <section>
+            <div class="row">
+                <div class="col-lg-9">
+                    @RenderBody()
+                </div>
+                <div class="col-lg-3">
+                    <div class="card card-default">
+                        <div class="card-heading">
+                            <h2 class="card-title">REPORT</h2>
+                        </div>
+                        <div class="card-block">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+    @Html.Partial("_Footer")
+    <!-- JAVASCRIPT FILES -->
+    <script type="text/javascript">var plugin_path = '/assets/plugins/';</script>
+    <script type="text/javascript" src="~/assets/plugins/jquery/jquery-2.2.3.min.js"></script>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript" src="~/assets/js/scripts.js"></script>
     @RenderSection("scripts", required: false)
+
+    <!-- JS DATATABLES -->
+    <script src="~/assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/plugins/datatables/js/dataTables.tableTools.min.js"></script>
+    <script src="~/assets/plugins/datatables/js/dataTables.colReorder.min.js"></script>
+    <script src="~/assets/plugins/datatables/js/dataTables.scroller.min.js"></script>
+    <script src="~/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/assets/plugins/select2/js/select2.full.min.js"></script>
+    <script>
+
+        function initTable1() {
+            var table = jQuery('#sample_1');
+
+            /* Table tools samples: https://www.datatables.net/release-datatables/extras/TableTools/ */
+
+            /* Set tabletools buttons and button container */
+
+            $.extend(true, $.fn.DataTable.TableTools.classes, {
+                "container": "btn-group float-right tabletools-topbar",
+                "buttons": {
+                    "normal": "btn btn-sm btn-default",
+                    "disabled": "btn btn-sm btn-default disabled"
+                },
+                "collection": {
+                    "container": "DTTT_dropdown dropdown-menu tabletools-dropdown-menu"
+                }
+            });
+
+            var oTable = table.dataTable({
+                "order": [
+                    [0, 'asc']
+                ],
+
+                "lengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "pageLength": 10,
+
+                "dom": "<'row' <'col-md-12'T>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
+
+                "tableTools": {
+                    "sSwfPath": "/assets/plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+                    "aButtons": [{
+                        "sExtends": "pdf",
+                        "sButtonText": "PDF"
+                    }, {
+                        "sExtends": "csv",
+                        "sButtonText": "CSV"
+                    }, {
+                        "sExtends": "xls",
+                        "sButtonText": "Excel"
+                    }, {
+                        "sExtends": "print",
+                        "sButtonText": "Print",
+                        "sInfo": 'Please press "CTR+P" to print or "ESC" to quit',
+                        "sMessage": "Generated by DataTables"
+                    }]
+                }
+            });
+
+            var tableWrapper = jQuery('#sample_1_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
+
+            tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
+        }
+
+        // Table Init
+        initTable1();
+    </script>
+
 </body>
 </html>

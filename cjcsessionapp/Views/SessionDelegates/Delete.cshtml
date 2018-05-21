@@ -4,12 +4,8 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
-
 <h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>SessionDelegate</h4>
-    <hr />
+<div>    
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -36,11 +32,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Pastor)
+            Institution
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Pastor)
+            @Html.DisplayFor(model => model.Institution.Name)
         </dd>
 
         <dt>
@@ -60,11 +56,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Age)
+            @Html.DisplayNameFor(model => model.AgeGroup)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Age)
+            @Html.DisplayFor(model => model.AgeGroup)
         </dd>
 
         <dt>
@@ -116,36 +112,12 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Reguar)
+            @Html.DisplayNameFor(model => model.DelegateType)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Reguar)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Guest)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Guest)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DelegateAtLarge)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DelegateAtLarge)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SpecialDelegate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SpecialDelegate)
-        </dd>
+            @Html.DisplayFor(model => model.DelegateType)
+        </dd>        
 
         <dt>
             @Html.DisplayNameFor(model => model.Allergies)

@@ -1,0 +1,113 @@
+﻿@model cjcsessionapp.Models.ApplicationUser
+@{
+    ViewBag.Title = "User Information";
+}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content">
+            <div class="box-icon-title">
+                <i class="fa fa-user"></i>
+                <h2>@Model.FullName</h2>
+            </div>
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    @if (!Model.LockoutEnabled)
+                    {
+                        <tr>
+                            <td style="text-align:right;"><b>Status: </b></td>
+                            <td>This user cannot be locked out of his or her account.</td>
+                            <td></td>
+                        </tr>
+                    }
+                    <tr>
+                        <td style="text-align:right;">
+                            <b>@Html.LabelFor(model => model.EmailConfirmed, new { @class="text-bold"}) </b>
+                        </td>
+                        @if (Model.EmailConfirmed == true)
+                        {
+                            <td>Yes</td>
+                        }
+                        else
+                        {
+                            <td>No</td>
+                        }
+                        <td></td>
+                    </tr>
+                
+                    @if (Model.LockoutEnabled && (Model.LockoutEndDateUtc <= DateTime.Now || Model.LockoutEndDateUtc == null))
+                    {
+                        <tr id="locked">
+                            <td style="text-align:right;"><b>Status: </b></td>
+                            <td>Unlocked</td>                        
+                            
+                            <td>
+                                @using (Html.BeginForm("LockAccount", "ApplicationUsers", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.Id)
+                                    <input type="submit" value="Lock Account" class="btn btn-danger" />
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right;"><b>Access Failed Count: </b></td>
+                            <td>@Model.AccessFailedCount</td>
+                            <td></td>
+                        </tr>
+                    }
+
+                <tr id="unlocked">
+                    @if (Model.LockoutEnabled && (Model.LockoutEndDateUtc > DateTime.Now))            {
+                        <td style="text-align:right;"><b>Locked-out until: </b></td>
+                        <td>@Model.LockoutEndDateUtc</td>
+                        <td>
+                            @using (Html.BeginForm("UnlockAccount", "ApplicationUsers", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.Id)
+                                <input type="submit" value="UnLock Account" class="btn btn-success" />
+                            }
+                        </td>
+                    }
+                </tr>
+                @using (Html.BeginForm("Edit", "ApplicationUsers", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+                {
+                    <tr>
+                        <td style="text-align:right;"><b>Roles: </b></td>
+                        <td>
+                            @foreach (var item in Model.RolesList)
+                            {
+                                <input type="checkbox" name="RolesSelectedOnView" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                                @Html.Label(item.Value, new { @class = "control-label" })
+                            }
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="text-align:right;">
+                            <a href="@Url.Action("Index", "ApplicationUsers")" class="btn btn-danger">Close</a>
+                        </td>
+                        <td>
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
+                            @Html.AntiForgeryToken()
+                            <input type="submit" value="Save" class="btn btn-primary" />
+
+                        </td>
+                    </tr>
+                } 
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

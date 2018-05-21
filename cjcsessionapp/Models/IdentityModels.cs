@@ -1,6 +1,7 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -16,22 +17,27 @@ namespace cjcsessionapp.Models
             // Add custom user claims here
             return userIdentity;
         }
-    }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+        public ApplicationUser()
         {
+            SessionDelegates = new List<SessionDelegate>();
+            Registrations = new List<Registered>();
         }
 
-        public DbSet<SessionDelegate> SessionDelegates { get; set; }
-        public DbSet<Institution> Institutions { get; set; }
-        public DbSet<Registered> Registered { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }        
+        public string Position { get; set; }
 
-        public static ApplicationDbContext Create()
+        public string FullName
         {
-            return new ApplicationDbContext();
+            get { return FirstName + " " + LastName; }
         }
+
+        public virtual List<SessionDelegate> SessionDelegates { get; set; }
+        public virtual List<Registered> Registrations { get; set; }
+
+        public IEnumerable<SelectListItem> RolesList { get; set; }
     }
+
+    
 }

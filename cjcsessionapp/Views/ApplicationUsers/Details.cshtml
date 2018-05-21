@@ -1,0 +1,28 @@
+﻿@model cjcsessionapp.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "User Activity History";
+    string currentLocation = HttpContext.Current.Request.Url.AbsolutePath;
+}
+
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <section class="col-md-6">
+                    <label>Name:&nbsp;</label>
+                    @Html.DisplayFor(model => model.FullName, new { @class = "form-control" })
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="heading heading-v4 margin-bottom-40">
+        <h2>FORMS SUBMITTED BY YOU</h2>        
+    </div>
+   
+<p>
+    <br />
+    <div class="col-sm-1 col-sm-offset-11">
+        @Html.ActionLink("Close", "Index", "Manage", new { }, new { @class = "btn btn-danger btn-lg" })
+    </div>
+</p>

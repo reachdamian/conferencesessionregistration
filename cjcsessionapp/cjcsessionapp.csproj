@@ -46,10 +46,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -195,7 +199,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccessDeniedController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationRolesController.cs" />
+    <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SessionDelegatesController.cs" />
@@ -206,14 +213,43 @@
     <Compile Include="Migrations\201805172028455_removeDelegateIdfrominstitution.Designer.cs">
       <DependentUpon>201805172028455_removeDelegateIdfrominstitution.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805182058053_UpdateDelegateModel.cs" />
+    <Compile Include="Migrations\201805182058053_UpdateDelegateModel.Designer.cs">
+      <DependentUpon>201805182058053_UpdateDelegateModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805182107215_MaritalStatusIsString.cs" />
+    <Compile Include="Migrations\201805182107215_MaritalStatusIsString.Designer.cs">
+      <DependentUpon>201805182107215_MaritalStatusIsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805182201456_TimeStamp.cs" />
+    <Compile Include="Migrations\201805182201456_TimeStamp.Designer.cs">
+      <DependentUpon>201805182201456_TimeStamp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805182204504_UserWhoRegisterDelegate.cs" />
+    <Compile Include="Migrations\201805182204504_UserWhoRegisterDelegate.Designer.cs">
+      <DependentUpon>201805182204504_UserWhoRegisterDelegate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805201940186_updateApplicationUser.cs" />
+    <Compile Include="Migrations\201805201940186_updateApplicationUser.Designer.cs">
+      <DependentUpon>201805201940186_updateApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805210017247_RoleManagement.cs" />
+    <Compile Include="Migrations\201805210017247_RoleManagement.Designer.cs">
+      <DependentUpon>201805210017247_RoleManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApplicationDBContext.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
+    <Compile Include="Models\ApplicationRoleViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Institution.cs" />
     <Compile Include="Models\ListsHelperModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RegisterDelegateViewModel.cs" />
     <Compile Include="Models\Registered.cs" />
     <Compile Include="Models\SessionDelegate.cs" />
+    <Compile Include="Models\SessionDelegateViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -231,6 +267,16 @@
     <Content Include="assets\css\custom-forms-v2.css" />
     <Content Include="assets\css\demo-menu-blue.css" />
     <Content Include="assets\css\essentials.css" />
+    <Content Include="assets\css\fa-brands.css" />
+    <Content Include="assets\css\fa-brands.min.css" />
+    <Content Include="assets\css\fa-regular.css" />
+    <Content Include="assets\css\fa-regular.min.css" />
+    <Content Include="assets\css\fa-solid.css" />
+    <Content Include="assets\css\fa-solid.min.css" />
+    <Content Include="assets\css\fontawesome-all.css" />
+    <Content Include="assets\css\fontawesome-all.min.css" />
+    <Content Include="assets\css\fontawesome.css" />
+    <Content Include="assets\css\fontawesome.min.css" />
     <Content Include="assets\css\header-0.css" />
     <Content Include="assets\css\header-1.css" />
     <Content Include="assets\css\header-2.css" />
@@ -3734,9 +3780,24 @@
     <Content Include="Views\SessionDelegates\Details.cshtml" />
     <Content Include="Views\SessionDelegates\Edit.cshtml" />
     <Content Include="Views\SessionDelegates\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\SessionDelegates\RegisterDelegate.cshtml" />
+    <Content Include="Views\SessionDelegates\_RegisterDelegate.cshtml" />
+    <Content Include="Views\SessionDelegates\_CancelRegistration.cshtml" />
+    <Content Include="Views\AccessDenied\NotAuthorized.cshtml" />
+    <Content Include="Views\AccessDenied\_ViewStart.cshtml" />
+    <Content Include="Views\ApplicationRoles\Create.cshtml" />
+    <Content Include="Views\ApplicationRoles\Delete.cshtml" />
+    <Content Include="Views\ApplicationRoles\Details.cshtml" />
+    <Content Include="Views\ApplicationRoles\Edit.cshtml" />
+    <Content Include="Views\ApplicationRoles\Index.cshtml" />
+    <Content Include="Views\ApplicationRoles\_ViewStart.cshtml" />
+    <Content Include="Views\ApplicationUsers\Details.cshtml" />
+    <Content Include="Views\ApplicationUsers\Edit.cshtml" />
+    <Content Include="Views\ApplicationUsers\Index.cshtml" />
+    <Content Include="Views\ApplicationUsers\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3757,6 +3818,24 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201805172028455_removeDelegateIdfrominstitution.resx">
       <DependentUpon>201805172028455_removeDelegateIdfrominstitution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805182058053_UpdateDelegateModel.resx">
+      <DependentUpon>201805182058053_UpdateDelegateModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805182107215_MaritalStatusIsString.resx">
+      <DependentUpon>201805182107215_MaritalStatusIsString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805182201456_TimeStamp.resx">
+      <DependentUpon>201805182201456_TimeStamp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805182204504_UserWhoRegisterDelegate.resx">
+      <DependentUpon>201805182204504_UserWhoRegisterDelegate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805201940186_updateApplicationUser.resx">
+      <DependentUpon>201805201940186_updateApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805210017247_RoleManagement.resx">
+      <DependentUpon>201805210017247_RoleManagement.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -55,5 +55,18 @@ namespace cjcsessionapp.Models
             };
             return items;
         }
+
+        public static IEnumerable<SelectListItem> AgeGroup()
+        {
+            List<SelectListItem> items = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text = "0-15", Value="0-15"},
+                new SelectListItem() { Text = "16-35", Value="16-35"},
+                new SelectListItem() { Text = "36-55", Value="36-55"},
+                new SelectListItem() { Text = "55 and Over", Value="55 and Over"}
+            };
+
+            return items;
+        }
     }
 }

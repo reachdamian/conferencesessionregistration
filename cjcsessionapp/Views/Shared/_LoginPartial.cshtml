@@ -1,25 +1,5 @@
-﻿@*@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-        @Html.AntiForgeryToken()
+﻿@using Microsoft.AspNet.Identity
 
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-            </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-        </ul>
-    }
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-}*@
 
 
 <!-- Top Bar -->
@@ -28,47 +8,26 @@ else
 
         <!-- right -->
         <ul class="top-links list-inline pull-right">
-            <li class="text-welcome hidden-xs">Welcome to Smarty, <strong>John Doe</strong></li>
-            <li>
-                <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><i class="fa fa-user hidden-xs"></i> MY ACCOUNT</a>
-                <ul class="dropdown-menu pull-right">
-                    <li><a tabindex="-1" href="#"><i class="fa fa-history"></i> ORDER HISTORY</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> MY WISHLIST</a></li>
-                    <li><a tabindex="-1" href="#"><i class="fa fa-edit"></i> MY REVIEWS</a></li>
-                    <li><a tabindex="-1" href="#"><i class="fa fa-cog"></i> MY SETTINGS</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="-1" href="#"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
-                </ul>
-            </li>
-            <li class="hidden-xs"><a href="page-login-1.html">LOGIN</a></li>
-            <li class="hidden-xs"><a href="page-register-1.html">REGISTER</a></li>
-        </ul>
 
-        <!-- left -->
-        <ul class="top-links list-inline">
-            <li class="hidden-xs"><a href="page-faq-1.html">FAQ</a></li>
-            <li>
-                <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><img class="flag-lang" src="assets/images/_smarty/flags/us.png" width="16" height="11" alt="lang" /> ENGLISH</a>
-                <ul class="dropdown-langs dropdown-menu">
-                    <li><a tabindex="-1" href="#"><img class="flag-lang" src="assets/images/_smarty/flags/us.png" width="16" height="11" alt="lang" /> ENGLISH</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="-1" href="#"><img class="flag-lang" src="assets/images/_smarty/flags/de.png" width="16" height="11" alt="lang" /> GERMAN</a></li>
-                    <li><a tabindex="-1" href="#"><img class="flag-lang" src="assets/images/_smarty/flags/ru.png" width="16" height="11" alt="lang" /> RUSSIAN</a></li>
-                    <li><a tabindex="-1" href="#"><img class="flag-lang" src="assets/images/_smarty/flags/it.png" width="16" height="11" alt="lang" /> ITALIAN</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">USD</a>
-                <ul class="dropdown-langs dropdown-menu">
-                    <li><a tabindex="-1" href="#">USD</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="-1" href="#">EUR</a></li>
-                    <li><a tabindex="-1" href="#">GBP</a></li>
-                </ul>
-            </li>
-        </ul>
-
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()                    
+                    <li>
+                        @Html.ActionLink("Hello " + User.Identity.Name, "Index", "Manage", null, new { @class= "text-welcome hidden-xs", title = "Manage" })
+                    </li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-off"></i>Log off</a></li>                    
+                }
+            }
+            else
+            {
+               
+                <li>@Html.ActionLink("Register", "Register", "Account", null, new { @class="hidden-xs", id = "registerLink" })</li>
+                <li>@Html.ActionLink("Log in", "Login", "Account", null, new { @class = "hidden-xs", id = "loginLink" })</li>
+                
+            }
+        </ul>        
     </div>
 </div>
 <!-- /Top Bar -->

@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Not Authorized";
+}
+
+@section Heading {
+    <div class="heading heading-v4 margin-bottom-40">
+        <h2>Access Denied</h2>    
+        <p>This could mean one of two things:</p>    
+    </div>
+}
+
+<div class="alert alert-danger fade in">        
+    <ul>
+        <li>You are not authorized to view this page.</li>
+        <li>Your account has not yet been activated by Risk Manager.</li>
+    </ul>
+    <p>
+        @Html.ActionLink("Go to Home Page", "Index", "Home", new { @class="btn btn-primary"})        
+    </p>
+</div>
+
