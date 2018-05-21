@@ -1,0 +1,82 @@
+﻿@using cjcsessionapp.Models
+
+@{ 
+
+    ApplicationDbContext db = new ApplicationDbContext();
+
+    ReportModel reportSummary = new ReportModel();
+
+    reportSummary.NumberOfDelegatesAtLarge = db.SessionDelegates.Where(m => m.DelegateType == "Delegate At Large" && m.Registered.Count>0).Count();
+    reportSummary.NumberOfGuests = db.SessionDelegates.Where(m => m.DelegateType == "Guest" && m.Registered.Count > 0).Count();
+    reportSummary.NumberOfSpecialDelegates = db.SessionDelegates.Where(m => m.DelegateType == "Special Delegate" && m.Registered.Count > 0).Count();
+    reportSummary.NumberOfSpecialGuests = db.SessionDelegates.Where(m => m.DelegateType == "Special Guests" && m.Registered.Count > 0).Count();
+    reportSummary.NumberOfRegularDelegates = db.SessionDelegates.Where(m => m.DelegateType == "Regular" && m.Registered.Count > 0).Count();
+
+    reportSummary.TotalDelegates = reportSummary.NumberOfDelegatesAtLarge + reportSummary.NumberOfSpecialDelegates + reportSummary.NumberOfRegularDelegates;
+    reportSummary.GrandTotal = reportSummary.TotalDelegates + reportSummary.NumberOfSpecialGuests + reportSummary.NumberOfGuests;
+
+}
+<div class="box-static box-transparent box-bordered p-30 relative">
+    <div class="ribbon">
+        <!-- ribbon inside relative box -->
+        <div class="ribbon-inner">REPORT</div>
+    </div><!-- /ribbon -->
+
+    <div class="box-title mb-30">
+        <h2 class="fs-20">Summary</h2>
+    </div>
+
+    <div>        
+        <dl class="dl-horizontal">
+            <dt>
+                Regular Delegates
+            </dt>
+
+            <dd>
+                @reportSummary.NumberOfRegularDelegates
+            </dd>
+
+            <dt>
+                Delegates at Large
+            </dt>
+            <dd>
+                @reportSummary.NumberOfDelegatesAtLarge
+            </dd>
+
+            <dt>
+                Special Delegates
+            </dt>
+            <dd>
+                @reportSummary.NumberOfSpecialDelegates
+            </dd>
+
+            <dt>
+                Special Guests
+            </dt>
+            <dd>
+                @reportSummary.NumberOfSpecialGuests
+            </dd>
+
+            <dt>
+                Guests
+            </dt>
+            <dd>
+                @reportSummary.NumberOfGuests
+            </dd>
+
+            <dt>
+                Total Delegates
+            </dt>
+            <dd>
+                @reportSummary.TotalDelegates
+            </dd>
+
+            <dt>
+                Grand Total
+            </dt>
+            <dd>
+                @reportSummary.GrandTotal
+            </dd>
+        </dl>
+    </div>
+</div>

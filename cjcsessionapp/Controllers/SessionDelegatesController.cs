@@ -19,7 +19,6 @@ namespace cjcsessionapp.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-
         public SessionDelegatesController()
         {
 
@@ -214,6 +213,19 @@ namespace cjcsessionapp.Controllers
 
             ViewBag.Success = "1 Delegate Registration Successfully Cancelled";
             return RedirectToAction("Index");
+        }
+
+        public ActionResult _ReportSummary()
+        {
+            ReportModel reportSummary = new ReportModel();
+
+            reportSummary.NumberOfDelegatesAtLarge = db.SessionDelegates.Where(m => m.DelegateType == "Delegate At Large").Count();
+            reportSummary.NumberOfGuests = db.SessionDelegates.Where(m => m.DelegateType == "Guest").Count();
+            reportSummary.NumberOfSpecialDelegates = db.SessionDelegates.Where(m => m.DelegateType == "Special Delegate").Count();
+            reportSummary.NumberOfSpecialGuests = db.SessionDelegates.Where(m => m.DelegateType == "Special Guests").Count();
+            reportSummary.NumberOfRegularDelegates = db.SessionDelegates.Where(m => m.DelegateType == "Regular").Count();
+
+            return PartialView(reportSummary);
         }
 
         protected override void Dispose(bool disposing)
