@@ -209,34 +209,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805172028455_removeDelegateIdfrominstitution.cs" />
-    <Compile Include="Migrations\201805172028455_removeDelegateIdfrominstitution.Designer.cs">
-      <DependentUpon>201805172028455_removeDelegateIdfrominstitution.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805182058053_UpdateDelegateModel.cs" />
-    <Compile Include="Migrations\201805182058053_UpdateDelegateModel.Designer.cs">
-      <DependentUpon>201805182058053_UpdateDelegateModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805182107215_MaritalStatusIsString.cs" />
-    <Compile Include="Migrations\201805182107215_MaritalStatusIsString.Designer.cs">
-      <DependentUpon>201805182107215_MaritalStatusIsString.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805182201456_TimeStamp.cs" />
-    <Compile Include="Migrations\201805182201456_TimeStamp.Designer.cs">
-      <DependentUpon>201805182201456_TimeStamp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805182204504_UserWhoRegisterDelegate.cs" />
-    <Compile Include="Migrations\201805182204504_UserWhoRegisterDelegate.Designer.cs">
-      <DependentUpon>201805182204504_UserWhoRegisterDelegate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805201940186_updateApplicationUser.cs" />
-    <Compile Include="Migrations\201805201940186_updateApplicationUser.Designer.cs">
-      <DependentUpon>201805201940186_updateApplicationUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805210017247_RoleManagement.cs" />
-    <Compile Include="Migrations\201805210017247_RoleManagement.Designer.cs">
-      <DependentUpon>201805210017247_RoleManagement.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDBContext.cs" />
@@ -3814,29 +3786,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805172028455_removeDelegateIdfrominstitution.resx">
-      <DependentUpon>201805172028455_removeDelegateIdfrominstitution.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805182058053_UpdateDelegateModel.resx">
-      <DependentUpon>201805182058053_UpdateDelegateModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805182107215_MaritalStatusIsString.resx">
-      <DependentUpon>201805182107215_MaritalStatusIsString.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805182201456_TimeStamp.resx">
-      <DependentUpon>201805182201456_TimeStamp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805182204504_UserWhoRegisterDelegate.resx">
-      <DependentUpon>201805182204504_UserWhoRegisterDelegate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805201940186_updateApplicationUser.resx">
-      <DependentUpon>201805201940186_updateApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805210017247_RoleManagement.resx">
-      <DependentUpon>201805210017247_RoleManagement.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
