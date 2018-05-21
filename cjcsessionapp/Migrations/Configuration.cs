@@ -73,7 +73,7 @@ namespace cjcsessionapp.Migrations
 
             if (user2 == null)
             {
-                user = new ApplicationUser { UserName = name2, Email = name2, FirstName = firstName2, LastName = lastName2, EmailConfirmed = true };
+                user2 = new ApplicationUser { UserName = name2, Email = name2, FirstName = firstName2, LastName = lastName2, EmailConfirmed = true };
                 var result = userManager.Create(user2, password2);
 
                 result = userManager.SetLockoutEnabled(user2.Id, false);

@@ -204,6 +204,7 @@
     <Compile Include="Controllers\ApplicationRolesController.cs" />
     <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstitutionsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SessionDelegatesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -3772,6 +3773,11 @@
     <Content Include="Views\ApplicationUsers\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_ReportSummary.cshtml" />
+    <Content Include="Views\Institutions\Create.cshtml" />
+    <Content Include="Views\Institutions\Delete.cshtml" />
+    <Content Include="Views\Institutions\Details.cshtml" />
+    <Content Include="Views\Institutions\Edit.cshtml" />
+    <Content Include="Views\Institutions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
