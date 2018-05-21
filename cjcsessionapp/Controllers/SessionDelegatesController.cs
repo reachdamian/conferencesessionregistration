@@ -59,12 +59,7 @@ namespace cjcsessionapp.Controllers
         // GET: SessionDelegates
         public ActionResult Index()
         {
-            List<SelectListItem> items = new List<SelectListItem>();
-            SelectListItem item1 = new SelectListItem { Text = "Male", Value = "1", Selected = true };
-            SelectListItem item2 = new SelectListItem { Text = "Female", Value = "2", Selected = false };
-
-            items.Add(item1);
-            items.Add(item2);
+            
 
             ViewBag.Gender = items;
 
