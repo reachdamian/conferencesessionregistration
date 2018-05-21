@@ -220,6 +220,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RegisterDelegateViewModel.cs" />
     <Compile Include="Models\Registered.cs" />
+    <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SessionDelegate.cs" />
     <Compile Include="Models\SessionDelegateViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -3770,6 +3771,7 @@
     <Content Include="Views\ApplicationUsers\Index.cshtml" />
     <Content Include="Views\ApplicationUsers\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Shared\_ReportSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

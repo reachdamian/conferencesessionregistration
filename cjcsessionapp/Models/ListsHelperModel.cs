@@ -15,7 +15,8 @@ namespace cjcsessionapp.Models
                 new SelectListItem() {Text = "Regular", Value = "Regular" },
                 new SelectListItem() {Text = "Delegate At Large", Value = "Delegate At Large"},
                 new SelectListItem() {Text = "Special Delegate", Value="Special Delegate", },
-                new SelectListItem() {Text = "Guest", Value = "Gueset"}          
+                new SelectListItem() {Text = "Guest", Value = "Guest"},
+                new SelectListItem() {Text = "Special Guest", Value = "Special Guest"}
             };
             return delegatetypes;
         }
