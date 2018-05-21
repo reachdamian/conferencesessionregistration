@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -12,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace cjcsessionapp.Controllers
 {
+    [Authorize(Roles = "Admin, Registrar")]
     public class SessionDelegatesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -60,8 +60,6 @@ namespace cjcsessionapp.Controllers
         public ActionResult Index()
         {
             
-
-            ViewBag.Gender = items;
 
             var sessionDelegates = db.SessionDelegates.Include(a => a.Registered).ToList();
 

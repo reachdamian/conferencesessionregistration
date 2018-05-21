@@ -1,6 +1,11 @@
 ﻿@using Microsoft.AspNet.Identity
+@using cjcsessionapp.Models
+@{ 
+    ApplicationDbContext db = new ApplicationDbContext();
 
-
+    string currentUserId = User.Identity.GetUserId();
+    ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+}
 
 <!-- Top Bar -->
 <div id="topBar" class="dark">
@@ -13,19 +18,20 @@
             {
                 using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                 {
-                    @Html.AntiForgeryToken()                    
-                    <li>
-                        @Html.ActionLink("Hello " + User.Identity.Name, "Index", "Manage", null, new { @class= "text-welcome hidden-xs", title = "Manage" })
-                    </li>
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-off"></i>Log off</a></li>                    
+                    @Html.AntiForgeryToken()
+
                 }
+                <li>
+                    @Html.ActionLink("Welcome, " + currentUser.FirstName, "Index", "Manage", null, new { @class = "text-welcome hidden-xs", title = "Manage" })
+                </li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-off"></i>Log off</a></li>
             }
             else
             {
-               
-                <li>@Html.ActionLink("Register", "Register", "Account", null, new { @class="hidden-xs", id = "registerLink" })</li>
+
+                <li>@Html.ActionLink("Register", "Register", "Account", null, new { @class = "hidden-xs", id = "registerLink" })</li>
                 <li>@Html.ActionLink("Log in", "Login", "Account", null, new { @class = "hidden-xs", id = "loginLink" })</li>
-                
+
             }
         </ul>        
     </div>
