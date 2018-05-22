@@ -37,6 +37,7 @@ namespace cjcsessionapp.Models
         public virtual List<Registered> Registrations { get; set; }
 
         public IEnumerable<SelectListItem> RolesList { get; set; }
+        public bool ConfirmedEmail { get; internal set; }
     }
 
     

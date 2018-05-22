@@ -11,6 +11,10 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using cjcsessionapp.Models;
+using static cjcsessionapp.Controllers.AccountController;
+using System.Configuration;
+using System.Net;
+using cjcsessionapp.Controllers;
 
 namespace cjcsessionapp
 {
@@ -19,9 +23,12 @@ namespace cjcsessionapp
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+
+           return Task.FromResult(0);
         }
     }
+
+  
 
     public class SmsService : IIdentityMessageService
     {
@@ -117,6 +124,11 @@ namespace cjcsessionapp
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
             return new ApplicationRoleManager(new RoleStore<ApplicationRole>(context.Get<ApplicationDbContext>()));
+        }
+
+        internal Task CreateAsync(IdentityRole role)
+        {
+            throw new NotImplementedException();
         }
     }
 }
