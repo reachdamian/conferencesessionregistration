@@ -194,11 +194,7 @@ namespace cjcsessionapp.Controllers
         }
 
      
-        [AllowAnonymous]
-public ActionResult Confirm(string Email)
-{
-  ViewBag.Email = Email;return View();
-} 
+
 
         //
         // GET: /Account/ConfirmEmail
