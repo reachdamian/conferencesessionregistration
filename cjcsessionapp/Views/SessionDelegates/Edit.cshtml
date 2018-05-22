@@ -9,12 +9,12 @@
         <h2 class="panel-title">Edit Delegate Information</h2>
     </div>
     <div class="panel-body">
-        @using (Html.BeginForm("Edit", "SessionDelegates", FormMethod.Post, new { @class = "fancy-form" }))
+        @using (Html.BeginForm("Edit", "SessionDelegates", FormMethod.Post, new { @class = "" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model=>model.Id)
-            @Html.HiddenFor(model=>model.DateAdded)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.DateAdded)
 
             <div class="row">
                 <div class="col-md-2">
@@ -37,12 +37,12 @@
             <div class="row">
                 <div class="col-md-8">
                     <label>Institutions</label>
-                    @Html.DropDownList("InstitutionId", (IEnumerable<SelectListItem>)ViewBag.InstitutionList, "Select Institution", new { @class = "form-control select2" })
+                    @Html.DropDownList("InstitutionId", (IEnumerable<SelectListItem>)ViewBag.InstitutionList, "Select Institution", new { @class = "form-control required select2" })
                     @Html.ValidationMessageFor(model => model.InstitutionId, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.DelegateType)
-                    @Html.DropDownListFor(model => model.DelegateType, ListsHelperModel.DelegateType(), "Select Delegate Type", new { @class = "form-control col-md-2" })
+                    @Html.DropDownListFor(model => model.DelegateType, ListsHelperModel.DelegateType(), "Select Delegate Type", new { @class = "form-control required" })
                     @Html.ValidationMessageFor(model => model.DelegateType, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -173,5 +173,6 @@
 
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/assets/plugins/form.validate/jquery.form.min.js"></script>
+    <script src="~/assets/plugins/form.validate/jquery.validation.min.js"></script>
 }
