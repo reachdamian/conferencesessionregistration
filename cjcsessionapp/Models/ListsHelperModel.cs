@@ -69,5 +69,19 @@ namespace cjcsessionapp.Models
 
             return items;
         }
+
+        public static IEnumerable<SelectListItem> Positions()
+        {
+            List<SelectListItem> items = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text = "Administrator", Value="Administrator"},
+                new SelectListItem() { Text = "Director", Value="Director"},
+                new SelectListItem() { Text = "Pastor", Value="Pastor"},
+                new SelectListItem() { Text = "Admin. Professional", Value="Admin. Professional"},
+                new SelectListItem() { Text = "Other", Value="Other"},
+            };
+
+            return items;
+        }
     }
 }

@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using cjcsessionapp.Models;
-using static cjcsessionapp.Controllers.AccountController;
-using System.Configuration;
-using System.Net;
-using cjcsessionapp.Controllers;
 
 namespace cjcsessionapp
 {
@@ -23,8 +15,7 @@ namespace cjcsessionapp
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-
-           return Task.FromResult(0);
+            return Task.FromResult(0);
         }
     }
 

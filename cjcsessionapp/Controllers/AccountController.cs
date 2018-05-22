@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -9,9 +6,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using cjcsessionapp.Models;
-using System.Net;
-using System.Net.Mail;
-using System.Configuration;
 
 namespace cjcsessionapp.Controllers
 {
@@ -154,46 +148,30 @@ namespace cjcsessionapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                        { UserName = model.Email,
+                            Email = model.Email,
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
+                            Position = model.Position
+                        };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //  var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    System.Net.Mail.MailMessage m = new System.Net.Mail.MailMessage(
-               new System.Net.Mail.MailAddress("sender@mydomain.com", "Web Registration"),
-               new System.Net.Mail.MailAddress(user.Email));
-                    m.Subject = "Email confirmation";
-                    m.Body = string.Format("Dear {0} < BR /> Thank you for your registration, please click on the below link to complete your registration: < a href =\"{1}\" title =\"User Email Confirm\">{1}</a>",
-                       user.UserName, Url.Action("ConfirmEmail", "Account",
-                       new { Token = user.Id, Email = user.Email }, Request.Url.Scheme)) ;
-                    m.IsBodyHtml = true;
-                    System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("smtp.mydomain.com");
-                    smtp.Credentials = new System.Net.NetworkCredential("sender@mydomain.com", "password");
-                    smtp.ServerCertificateValidationCallback = () => true;
-                    smtp.EnableSsl = true;
-                    smtp.Send(m);
-                    return RedirectToAction("Confirm", "Account", new { Email = user.Email });
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return View("CheckYourMail");
                 }
-                else
-                {
-                    AddErrors(result);
-                }
-            
-        
-               
+                AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-     
 
 
         //
@@ -201,39 +179,17 @@ namespace cjcsessionapp.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            /*if (userId == null || code == null)
+            if (userId == null || code == null)
             {
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");*/
-
-            ApplicationUser user = this.UserManager.FindById(userId);
-            if (user != null)
-            {
-                if (user.Email == code)
-                {
-                    user.ConfirmedEmail = true;
-                    await UserManager.UpdateAsync(user);
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home", new { ConfirmedEmail = user.Email });
-                }
-                else
-                {
-                    return RedirectToAction("Confirm", "Account", new { Email = user.Email });
-                }
-            }
-            else
-            {
-                return RedirectToAction("Confirm", "Account", new { Email = "" });
-            }
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        
-    
-    //
-    // GET: /Account/ForgotPassword
-    [AllowAnonymous]
+        //
+        // GET: /Account/ForgotPassword
+        [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
@@ -257,12 +213,10 @@ namespace cjcsessionapp.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
-
-
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form

@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
@@ -53,26 +54,22 @@ namespace cjcsessionapp.Controllers
                 _userManager = value;
             }
         }
-
-
-        // GET: SessionDelegates
-        public ActionResult Index()
-        {
-            
-
-            var sessionDelegates = db.SessionDelegates.Include(a => a.Registered).ToList();
+        
+        public async Task<ActionResult> Index()
+        {     
+            var sessionDelegates = await db.SessionDelegates.Include(a => a.Registered).OrderBy(m=>m.LastName).ToListAsync();
 
             return View(sessionDelegates);
         }
-
-        // GET: SessionDelegates/Details/5
-        public ActionResult Details(int? id)
+        
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SessionDelegate sessionDelegate = db.SessionDelegates.Find(id);
+
+            SessionDelegate sessionDelegate = await db.SessionDelegates.FindAsync(id);
             if (sessionDelegate == null)
             {
                 return HttpNotFound();
@@ -89,7 +86,7 @@ namespace cjcsessionapp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FirstName,LastName,Title,InstitutionId,Address,Email,AgeGroup,MartialStatus,Gender,Telephone,RequireHousing,EmergencyContactName,EmergencyContactPhone,DelegateType,Allergies,Asthma,Diabetes,Vegetarian,HighBloodPressure,BronchialDisorder")] SessionDelegateViewModel sessionDelegateViewModel)
+        public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,Title,InstitutionId,Address,Email,AgeGroup,MartialStatus,Gender,Telephone,RequireHousing,EmergencyContactName,EmergencyContactPhone,DelegateType,Allergies,Asthma,Diabetes,Vegetarian,HighBloodPressure,BronchialDisorder")] SessionDelegateViewModel sessionDelegateViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -98,9 +95,9 @@ namespace cjcsessionapp.Controllers
                 newMap.DateAdded = DateTime.Now;
 
                 db.SessionDelegates.Add(newMap);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
 
-                ViewBag.Success = "1 Delegate Successfully Added to List.";
+                TempData["Success"] = "1 Delegate Successfully Added to List.";
                 return RedirectToAction("Index");
             }
 
@@ -108,13 +105,13 @@ namespace cjcsessionapp.Controllers
             return View(sessionDelegateViewModel);
         }
 
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SessionDelegate sessionDelegate = db.SessionDelegates.Find(id);
+            SessionDelegate sessionDelegate = await db.SessionDelegates.FindAsync(id);
             if (sessionDelegate == null)
             {
                 return HttpNotFound();
@@ -127,25 +124,30 @@ namespace cjcsessionapp.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Title,DateAdded,InstitutionId,Address,Email,AgeGroup,MartialStatus,Gender,Telephone,RequireHousing,EmergencyContactName,EmergencyContactPhone,DelegateType,Allergies,Asthma,Diabetes,Vegetarian,HighBloodPressure,BronchialDisorder")] SessionDelegate sessionDelegate)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,FirstName,LastName,Title,DateAdded,InstitutionId,Address,Email,AgeGroup,MartialStatus,Gender,Telephone,RequireHousing,EmergencyContactName,EmergencyContactPhone,DelegateType,Allergies,Asthma,Diabetes,Vegetarian,HighBloodPressure,BronchialDisorder")] SessionDelegate sessionDelegate)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(sessionDelegate).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
+                TempData["Success"] = sessionDelegate.FirstName + " " + sessionDelegate.LastName + " record successfully updated.";
+
                 return RedirectToAction("Index");
             }
+
             return View(sessionDelegate);
         }
 
         // GET: SessionDelegates/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SessionDelegate sessionDelegate = db.SessionDelegates.Find(id);
+
+            SessionDelegate sessionDelegate = await db.SessionDelegates.FindAsync(id);
+
             if (sessionDelegate == null)
             {
                 return HttpNotFound();
@@ -155,79 +157,69 @@ namespace cjcsessionapp.Controllers
         
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            SessionDelegate sessionDelegate = db.SessionDelegates.Find(id);
+            SessionDelegate sessionDelegate = await db.SessionDelegates.FindAsync(id);
             db.SessionDelegates.Remove(sessionDelegate);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
+
+            TempData["Success"] = "1 Delegate Information deleted!";
             return RedirectToAction("Index");
         }
                 
-        public PartialViewResult _RegisterDelegate(int? id)
+        public async Task<ActionResult> RegisterDelegate(int? id)
         {
             if (id == null)
             {
                 
             }
 
-            SessionDelegate sessionDelegate = db.SessionDelegates.Find(id);
+            SessionDelegate sessionDelegate = await db.SessionDelegates.FindAsync(id);
 
-            return PartialView(sessionDelegate);
+            return View(sessionDelegate);
         }
         
-        [HttpPost, ActionName("_RegisterDelegate")]
+        [HttpPost, ActionName("RegisterDelegate")]
         [ValidateAntiForgeryToken]
-        public ActionResult ConfirmRegistration(int id)
+        public async Task<ActionResult> ConfirmRegistration(int id)
         {
-            SessionDelegate sessionDelegate = db.SessionDelegates.Include(a=>a.Registered).FirstOrDefault(a=>a.Id == id);
+            SessionDelegate sessionDelegate = await db.SessionDelegates.Include(a=>a.Registered).FirstOrDefaultAsync(a=>a.Id == id);
 
             Registered NewRegistration = new Registered() {  SessionDelegateId = id, ApplicationUserId =User.Identity.GetUserId(), DateAndTime = DateTime.Now};
 
             db.Registered.Add(NewRegistration);        
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
-            ViewBag.Success = "1 Delegate Successfully Registered";
+            TempData["Success"] = "1 Delegate Successfully Registered";
             return RedirectToAction("Index");
         }
 
-        public PartialViewResult _CancelRegistration(int? id)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> CancelRegistration(int? id)
         {
             if (id == null)
             {
 
             }
 
-            SessionDelegate sessionDelegate = db.SessionDelegates.Find(id);
+            SessionDelegate sessionDelegate = await db.SessionDelegates.FindAsync(id);
 
-            return PartialView(sessionDelegate);
+            return View(sessionDelegate);
         }
 
-        [HttpPost, ActionName("_CancelRegistration")]
+        [HttpPost, ActionName("CancelRegistration")]
         [ValidateAntiForgeryToken]
-        public ActionResult ConfirmCancelRegistration(int id)
+        public async Task<ActionResult> ConfirmCancelRegistration(int id)
         {
-            Registered RegistrationToDelete = db.Registered.FirstOrDefault(a=>a.SessionDelegateId == id);
+            Registered RegistrationToDelete = await db.Registered.FirstOrDefaultAsync(a=>a.SessionDelegateId == id);
 
             db.Registered.Remove(RegistrationToDelete);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
-            ViewBag.Success = "1 Delegate Registration Successfully Cancelled";
+            TempData["Success"] = "1 Delegate Registration Successfully Cancelled";
             return RedirectToAction("Index");
         }
-
-        public ActionResult _ReportSummary()
-        {
-            ReportModel reportSummary = new ReportModel();
-
-            reportSummary.NumberOfDelegatesAtLarge = db.SessionDelegates.Where(m => m.DelegateType == "Delegate At Large").Count();
-            reportSummary.NumberOfGuests = db.SessionDelegates.Where(m => m.DelegateType == "Guest").Count();
-            reportSummary.NumberOfSpecialDelegates = db.SessionDelegates.Where(m => m.DelegateType == "Special Delegate").Count();
-            reportSummary.NumberOfSpecialGuests = db.SessionDelegates.Where(m => m.DelegateType == "Special Guests").Count();
-            reportSummary.NumberOfRegularDelegates = db.SessionDelegates.Where(m => m.DelegateType == "Regular").Count();
-
-            return PartialView(reportSummary);
-        }
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)
