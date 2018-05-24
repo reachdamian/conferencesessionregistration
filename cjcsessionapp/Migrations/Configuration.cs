@@ -13,6 +13,7 @@ namespace cjcsessionapp.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(ApplicationDbContext context)
@@ -32,7 +33,8 @@ namespace cjcsessionapp.Migrations
 
             userManager.UserValidator = new UserValidator<ApplicationUser>(userManager)
             {
-                AllowOnlyAlphanumericUserNames = false
+                AllowOnlyAlphanumericUserNames = false,
+                
             };
 
             var roleManager = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(new ApplicationDbContext()));

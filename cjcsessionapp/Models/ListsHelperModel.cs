@@ -25,12 +25,11 @@ namespace cjcsessionapp.Models
         {
             List<SelectListItem> titles = new List<SelectListItem>()
             {
-                new SelectListItem() {Text = "Mr.", Value = "Mr." },
-                new SelectListItem() {Text = "Mrs.", Value = "Mrs."},
-                new SelectListItem() {Text = "Miss", Value="Miss", },
-                new SelectListItem() {Text = "Ms.", Value = "Ms."},
-                new SelectListItem() {Text = "Dr.", Value = "Dr."},
-                new SelectListItem() {Text = "Pastor", Value = "Pastor"}
+                new SelectListItem() {Text = "Regular", Value = "Regular" },
+                new SelectListItem() {Text = "Delegate At Large", Value = "Delegate At Large"},
+                new SelectListItem() {Text = "Special Delegate", Value="Special Delegate", },
+                new SelectListItem() {Text = "Guest", Value = "Guest"},
+                new SelectListItem() {Text = "Special Guest", Value = "Special Guest"}
             };
             return titles;
         }
