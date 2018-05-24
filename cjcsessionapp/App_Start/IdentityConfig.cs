@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using cjcsessionapp.Models;
+using System.Net.Mail;
 
 namespace cjcsessionapp
 {
@@ -14,12 +15,18 @@ namespace cjcsessionapp
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var smtpClient = new SmtpClient();
+
+            var mailMessage = new MailMessage("conferencesession@centralja.org", message.Destination)
+            {
+                Subject = message.Subject,
+                Body = message.Body
+            };
+
+            smtpClient.EnableSsl = true;
+            return smtpClient.SendMailAsync(mailMessage);
         }
     }
-
-  
 
     public class SmsService : IIdentityMessageService
     {
@@ -115,11 +122,6 @@ namespace cjcsessionapp
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
             return new ApplicationRoleManager(new RoleStore<ApplicationRole>(context.Get<ApplicationDbContext>()));
-        }
-
-        internal Task CreateAsync(IdentityRole role)
-        {
-            throw new NotImplementedException();
         }
     }
 }
