@@ -1,66 +1,181 @@
-﻿@using cjcsessionapp.Models
-@model SessionDelegate
+﻿@model cjcsessionapp.Models.SessionDelegate
 
-<div class="box-static box-border-top p-30">
+@{
+    ViewBag.Title = "Register Delegate";
+}
 
-    <div class="box-title mb-30">
-        <h2 class="fs-20">Are you sure you want to register this delegate?</h2>
-    </div>
+<h3>Are you sure you want to register this delegate?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
 
-    <div>
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Title)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Title)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.LastName)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
+        <dt>
+            Institution
+        </dt>
 
-            <dt>
-                Institution
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Institution.Name)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Institution.Name)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.DelegateType)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.DelegateType)
-            </dd>
-        </dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
 
-        @using (Html.BeginForm(null, null, FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.Id)
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
 
-            <div class="form-actions no-color">
-                <input type="submit" value="Register" class="btn btn-primary" />
-            </div>
-        }
-    </div>
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeGroup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgeGroup)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MartialStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MartialStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequireHousing)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequireHousing)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmergencyContactName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmergencyContactName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmergencyContactPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmergencyContactPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DelegateType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DelegateType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Allergies)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Allergies)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Asthma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asthma)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diabetes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diabetes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vegetarian)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vegetarian)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HighBloodPressure)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HighBloodPressure)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BronchialDisorder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BronchialDisorder)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Register" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
 </div>
-  
-  
-
