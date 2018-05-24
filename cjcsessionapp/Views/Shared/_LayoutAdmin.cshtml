@@ -33,16 +33,65 @@
 <body class="smoothscroll enable-animation">
     @Html.Partial("_LoginPartial")
     <div id="header" class="sticky clearfix">
+
         <!-- TOP NAV -->
-        @Html.Partial("_NavigationPartial")
+        <header id="topNav">
+            <div class="container">
+
+                <!-- Mobile Menu Button -->
+                <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Logo -->
+                <a class="logo pull-left" href="index.html">
+                    <img src="~/assets/images/_smarty/logo_light.png" alt="" /> <!-- light logo -->
+                    <img src="~/assets/images/_smarty/logo_dark.png" alt="" /> <!-- dark logo -->
+                </a>
+
+                <!--
+                    Top Nav
+
+                    AVAILABLE CLASSES:
+                    submenu-dark = dark sub menu
+                -->
+                <div class="navbar-collapse pull-right nav-main-collapse collapse">
+                    <nav class="nav-main">
+
+                        <ul id="topMain" class="nav nav-pills nav-main">
+                            <li class="active">
+                                <!-- HOME -->
+                                <a class="dropdown-toggle" href="#">
+                                    HOME
+                                </a>
+                            </li>
+                            <li class="dropdown">@Html.ActionLink("About", "About", "Home")</li>
+                            <li class="dropdown">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">@Html.ActionLink("Delegates", "Index", "SessionDelegates")</li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </header>
         <!-- /Top Nav -->
     </div>
     <div class="container body-content">
         <section>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-9">
                     @RenderBody()
-                </div>                
+                </div>
+                <div class="col-lg-3">
+                    <div class="card card-default">
+                        <div class="card-heading">
+                            <h2 class="card-title">REPORT</h2>
+                        </div>
+                        <div class="card-block">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
