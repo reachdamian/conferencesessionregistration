@@ -164,6 +164,21 @@ namespace cjcsessionapp.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    //Send email to Administrator also to inform him/her of new user so that role can be assigned.
+                    var userLink = Url.Action("edit", "applicationusers", new { user.Id }, protocol: Request.Url.Scheme);
+
+                    IdentityMessage msg = new IdentityMessage()
+                    {
+                        Body = "A new user has been registered. Visit this link to assign role to this user: " + userLink,
+                        Destination = "damian.chambers@centralja.org",
+                        Subject = "New Registered User"
+                    };
+
+                    EmailService email = new EmailService();
+                    await email.SendAsync(msg);
+
+
+
                     return View("CheckYourMail");
                 }
                 AddErrors(result);

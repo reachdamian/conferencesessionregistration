@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using cjcsessionapp.Infrastructure;
 using cjcsessionapp.Models;
 
 namespace cjcsessionapp.Controllers
 {
+    [CustAuthFilter(Roles = "Admin, User")]
     public class InstitutionsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

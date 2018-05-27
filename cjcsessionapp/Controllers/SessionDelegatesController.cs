@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using cjcsessionapp.Infrastructure;
 using cjcsessionapp.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace cjcsessionapp.Controllers
 {
-    [Authorize(Roles = "Admin, Registrar")]
+    [CustAuthFilter(Roles = "Admin, Registrar")]
     public class SessionDelegatesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -190,11 +191,20 @@ namespace cjcsessionapp.Controllers
             db.Registered.Add(NewRegistration);        
             await db.SaveChangesAsync();
 
+            //send email to user
+            string delegateEmail = sessionDelegate.Email;
+            if (!string.IsNullOrEmpty(delegateEmail))
+            {
+                //send email
+                await UserManager.SendEmailAsync(User.Identity.GetUserId(), "Welcome to CJC Conference Session", "You have been registered for the 5th Quadrennial Conference Session. Welcome!");
+
+            }
+
             TempData["Success"] = "1 Delegate Successfully Registered";
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = "Admin")]
+        [CustAuthFilter(Roles = "Admin")]
         public async Task<ActionResult> CancelRegistration(int? id)
         {
             if (id == null)
