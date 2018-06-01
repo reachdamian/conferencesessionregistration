@@ -25,6 +25,12 @@
                     @Html.ActionLink("Welcome, " + currentUser.FirstName, "Index", "Manage", null, new { @class = "text-welcome hidden-xs", title = "Manage" })
                 </li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-off"></i>Log off</a></li>
+                if (User.IsInRole("Admin"))
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "Admin", null)">Admin</a>
+                    </li>
+                }
             }
             else
             {

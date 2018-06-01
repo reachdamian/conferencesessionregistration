@@ -1,5 +1,12 @@
 ﻿@model IEnumerable<cjcsessionapp.Models.Institution>
+@using Microsoft.AspNet.Identity
+@using cjcsessionapp.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
 
+    string currentUserId = User.Identity.GetUserId();
+    ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+}
 @{
     ViewBag.Title = "Institution List";
 
@@ -58,7 +65,10 @@
     }
 </table>
 <div class="col-sm-2">
-    @Html.ActionLink("Load List", "LoadInstitutions", "Institutions", null, new { @class = "btn btn-primary" })
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Load List", "LoadInstitutions", "Institutions", null, new { @class = "btn btn-primary" })
+    }
 </div>
 @section scripts {
 
@@ -132,5 +142,5 @@
         initTable1();
 
     </script>
-    }
+}
 

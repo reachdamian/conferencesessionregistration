@@ -89,17 +89,17 @@ namespace cjcdonate.Controllers
         {
             if (ModelState.IsValid)
             {
-                //ApplicationRole applicationRole = new ApplicationRole { Name = applicationRoleViewModel.Name};
+                //ApplicationRole applicationRole = new ApplicationRole { Name = applicationRoleViewModel.Name };
 
                 //var roleResult = await RoleManager.CreateAsync(applicationRole);
 
-                //if(!roleResult.Succeeded)
+                //if (!roleResult.Succeeded)
                 //{
                 //    ModelState.AddModelError("", roleResult.Errors.First());
                 //    return View();
                 //}
-                                
-                return RedirectToAction("Index");
+
+                //return RedirectToAction("Index");
             }
 
             return View(applicationRoleViewModel);
