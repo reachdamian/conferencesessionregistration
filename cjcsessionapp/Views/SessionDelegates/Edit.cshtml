@@ -17,12 +17,17 @@
             @Html.HiddenFor(model => model.DateAdded)
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.Title)
+                    @Html.DropDownListFor(model => model.Title, ListsHelperModel.GetNameTitles(), "Select Title", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-5">
                     @Html.LabelFor(model => model.FirstName)
                     @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     @Html.LabelFor(model => model.LastName)
                     @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
@@ -32,12 +37,12 @@
             <div class="row">
                 <div class="col-md-8">
                     <label>Institutions</label>
-                    @Html.DropDownList("InstitutionId", (IEnumerable<SelectListItem>)ViewBag.InstitutionList, "Select Institution", new { @class = "form-control select2" })
+                    @Html.DropDownList("InstitutionId", (IEnumerable<SelectListItem>)ViewBag.InstitutionList, "Select Institution", new { @class = "form-control required select2" })
                     @Html.ValidationMessageFor(model => model.InstitutionId, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.DelegateType)
-                    @Html.DropDownListFor(model => model.DelegateType, ListsHelperModel.DelegateType(), "Select Delegate Type", new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.DelegateType, ListsHelperModel.DelegateType(), "Select Delegate Type", new { @class = "form-control required" })
                     @Html.ValidationMessageFor(model => model.DelegateType, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -71,7 +76,7 @@
                 </div>
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.AgeGroup)
-                    @Html.DropDownListFor(model => model.AgeGroup, ListsHelperModel.AgeGroup(), "Age Group", new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.AgeGroup, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.AgeGroup, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-4">
