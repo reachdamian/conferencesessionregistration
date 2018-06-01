@@ -68,5 +68,10 @@ namespace cjcsessionapp.Models
         public virtual Institution Institution { get; set; }
 
         public virtual List<Registered> Registered { get; set; }
+
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }
+        }
     }
 }

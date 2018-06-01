@@ -21,7 +21,6 @@
     </div>    
 }
 
-
 <p>
     @Html.ActionLink("Create New", "Create", "SessionDelegates", new { @class="btn btn-primary"})
 </p>
@@ -75,7 +74,9 @@
     </tr>
     }
 </table>
-
+<div class="col-sm-2">
+    @Html.ActionLink("Load Delegates List", "LoadDelegates", "SessionDelegates", null, new { @class = "btn btn-primary" })
+</div>
 
 @section scripts {
 

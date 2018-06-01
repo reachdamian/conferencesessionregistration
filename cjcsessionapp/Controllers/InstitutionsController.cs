@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using cjcsessionapp.Infrastructure;
 using cjcsessionapp.Models;
@@ -16,13 +14,11 @@ namespace cjcsessionapp.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Institutions
         public ActionResult Index()
         {
             return View(db.Institutions.ToList());
         }
-
-        // GET: Institutions/Details/5
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -42,25 +38,22 @@ namespace cjcsessionapp.Controllers
         {
             return View();
         }
-
-        // POST: Institutions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name, Number Of Delegates Assigned")] Institution institution)
+        public ActionResult Create([Bind(Include = "Id,Name, NumberOfDelegatesAssigned")] Institution institution)
         {
             if (ModelState.IsValid)
             {
                 db.Institutions.Add(institution);
                 db.SaveChanges();
+                ViewBag.Success = "1 Institution Successfully added to list.";
                 return RedirectToAction("Index");
             }
 
             return View(institution);
         }
-
-        // GET: Institutions/Edit/5
+        
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -74,24 +67,22 @@ namespace cjcsessionapp.Controllers
             }
             return View(institution);
         }
-
-        // POST: Institutions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name, Number Of Delegates Assigned")] Institution institution)
+        public ActionResult Edit([Bind(Include = "Id,Name, NumberOfDelegatesAssigned")] Institution institution)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(institution).State = EntityState.Modified;
                 db.SaveChanges();
+
+                ViewBag.Success = "1 Institution Successfully updated.";
                 return RedirectToAction("Index");
             }
             return View(institution);
         }
 
-        // GET: Institutions/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,8 +96,7 @@ namespace cjcsessionapp.Controllers
             }
             return View(institution);
         }
-
-        // POST: Institutions/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -114,8 +104,41 @@ namespace cjcsessionapp.Controllers
             Institution institution = db.Institutions.Find(id);
             db.Institutions.Remove(institution);
             db.SaveChanges();
+            ViewBag.Success = "1 Institution Successfully deleted from list.";
             return RedirectToAction("Index");
         }
+
+        [CustAuthFilter(Roles = "Admin")]
+        public ActionResult LoadInstitutions()
+        {
+
+            string fileName = "institutionlist.csv";
+            string directoryPath = Server.MapPath("~");
+
+            StreamReader stream = new StreamReader(directoryPath + fileName);
+            int counter = 0;
+
+            while (!stream.EndOfStream)
+            {
+                var line = stream.ReadLine();
+                var value = line.Split(',');
+                
+
+                Institution newInstitution = new Institution()
+                {
+                    Name = value[0],
+                    NumberOfDelegatesAssigned = 1 // needs to be changed to Convert.ToInt32(value[1]) 
+                };
+
+                db.Institutions.Add(newInstitution);
+                db.SaveChanges();
+                counter += 1;
+            }
+
+            ViewBag.Success = counter + " Institutions were successfully added.";
+            return RedirectToAction("Index");
+        }
+
 
         protected override void Dispose(bool disposing)
         {

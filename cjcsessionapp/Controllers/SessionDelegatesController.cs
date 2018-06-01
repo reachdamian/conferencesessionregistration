@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -229,7 +230,44 @@ namespace cjcsessionapp.Controllers
             TempData["Success"] = "1 Delegate Registration Successfully Cancelled";
             return RedirectToAction("Index");
         }
-        
+
+        [CustAuthFilter(Roles = "Admin")]
+        public ActionResult LoadDelegates()
+        {
+            string fileName = "delegateslist.csv";
+            string directoryPath = Server.MapPath("~");
+
+            StreamReader stream = new StreamReader(directoryPath + fileName);
+            int counter = 0;
+
+            while (!stream.EndOfStream)
+            {
+                var line = stream.ReadLine();
+                var value = line.Split(',');
+
+                if (value != null)
+                {
+                    SessionDelegate newSessionDelegate = new SessionDelegate()
+                    {
+                        Title = value[0],
+                        FirstName = value[1],
+                        LastName = value[2],
+                        InstitutionId = Convert.ToInt32(value[3]),
+                        DelegateType = value[4],
+                        DateAdded = DateTime.Now
+                    };
+
+                    db.SessionDelegates.Add(newSessionDelegate);
+                    db.SaveChanges();
+                    counter += 1;
+                }
+            }
+
+            ViewBag.Success = counter + " SessionDelegates were successfully added.";
+            return RedirectToAction("Index");
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

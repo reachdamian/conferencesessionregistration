@@ -3711,6 +3711,7 @@
     <Content Include="assets\plugins\slider.swiper\dist\js\maps\swiper.jquery.umd.min.js.map" />
     <Content Include="assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="assets\plugins\styleswitcher\color_schemes\color_scheme.fla" />
+    <Content Include="institutionlist.csv" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

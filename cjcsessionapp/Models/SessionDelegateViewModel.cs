@@ -11,6 +11,12 @@ namespace cjcsessionapp.Models
         {
             Registered = new List<Registered>();
         }
+        
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }            
+        }
+
 
         [Required]
         public DateTime DateAdded { get; set; }
