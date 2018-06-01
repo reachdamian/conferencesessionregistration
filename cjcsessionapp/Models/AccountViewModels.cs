@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace cjcsessionapp.Models
@@ -80,14 +79,6 @@ namespace cjcsessionapp.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        [DisplayName("First Name")]
-        public string FirstName { get; set; }
-
-        [DisplayName("Last Name")]
-        public string LastName { get; set; }
-
-        public string Position { get; set; }
     }
 
     public class ResetPasswordViewModel

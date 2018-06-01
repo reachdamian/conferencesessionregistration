@@ -3,11 +3,10 @@
 @{
     ViewBag.Title = "Details";
 }
-<div class="box-static box-border-top p-30">
 
-    <div class="box-title mb-30">
-        <h2 class="fs-20">Details</h2>
-    </div>
+<div>
+    <h4>SessionDelegate</h4>
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -23,15 +22,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+        </dd>      
 
         <dt>
             @Html.DisplayNameFor(model => model.Institution.Name)
@@ -171,8 +162,7 @@
 
     </dl>
 </div>
-
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class="btn btn-success"}) 
-    @Html.ActionLink("Back to List", "Index", null, new { @class="btn btn-default"})
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>

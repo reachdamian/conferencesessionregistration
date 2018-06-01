@@ -43,12 +43,11 @@ namespace cjcsessionapp.Models
         {
             List<SelectListItem> titles = new List<SelectListItem>()
             {
-                new SelectListItem() {Text = "Mr.", Value = "Mr." },
-                new SelectListItem() {Text = "Mrs.", Value = "Mrs."},
-                new SelectListItem() {Text = "Miss", Value="Miss", },
-                new SelectListItem() {Text = "Ms.", Value = "Ms."},
-                new SelectListItem() {Text = "Dr.", Value = "Dr."},
-                new SelectListItem() {Text = "Pastor", Value = "Pastor"}
+                new SelectListItem() {Text = "Regular", Value = "Regular" },
+                new SelectListItem() {Text = "Delegate At Large", Value = "Delegate At Large"},
+                new SelectListItem() {Text = "Special Delegate", Value="Special Delegate", },
+                new SelectListItem() {Text = "Guest", Value = "Guest"},
+                new SelectListItem() {Text = "Special Guest", Value = "Special Guest"}
             };
             return titles;
         }
@@ -83,20 +82,6 @@ namespace cjcsessionapp.Models
                 new SelectListItem() { Text = "16-35", Value="16-35"},
                 new SelectListItem() { Text = "36-55", Value="36-55"},
                 new SelectListItem() { Text = "55 and Over", Value="55 and Over"}
-            };
-
-            return items;
-        }
-
-        public static IEnumerable<SelectListItem> Positions()
-        {
-            List<SelectListItem> items = new List<SelectListItem>()
-            {
-                new SelectListItem() { Text = "Administrator", Value="Administrator"},
-                new SelectListItem() { Text = "Director", Value="Director"},
-                new SelectListItem() { Text = "Pastor", Value="Pastor"},
-                new SelectListItem() { Text = "Admin. Professional", Value="Admin. Professional"},
-                new SelectListItem() { Text = "Other", Value="Other"},
             };
 
             return items;

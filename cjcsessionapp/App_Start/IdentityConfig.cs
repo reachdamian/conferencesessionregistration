@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -27,8 +31,6 @@ namespace cjcsessionapp
             return smtpClient.SendMailAsync(mailMessage);
         }
     }
-
-  
 
     public class SmsService : IIdentityMessageService
     {
@@ -124,11 +126,6 @@ namespace cjcsessionapp
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
             return new ApplicationRoleManager(new RoleStore<ApplicationRole>(context.Get<ApplicationDbContext>()));
-        }
-
-        internal Task CreateAsync(IdentityRole role)
-        {
-            throw new NotImplementedException();
         }
     }
 }

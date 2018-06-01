@@ -1,75 +1,40 @@
-﻿@using cjcsessionapp.Models
-@model cjcsessionapp.Models.RegisterViewModel
-
+﻿@model cjcsessionapp.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
 }
-<div class="box-static box-border-top p-30">
-    <div class="box-title mb-30">
-        <h2 class="fs-20">Register</h2>
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
     </div>
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary("", new { @class = "text-danger" })
-
-    <fieldset>
-        <div class="row">
-            <div class="col-md-12">
-                @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
-                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
         </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
-                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-            </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                @Html.LabelFor(m => m.Position, new { @class = "control-label" })
-                @Html.DropDownListFor(m => m.Position, ListsHelperModel.Positions(), "-- Position --", new { @class = "form-control" })
-            </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Register" />
         </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                @Html.LabelFor(m => m.Email, new { @class = "control-label", autofocus = "autofocus" })
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                @Html.LabelFor(m => m.Password, new { @class = "control-label" })
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-            </div>            
-        </div>
-
-        <div class="row">            
-            <div class="col-md-12">
-                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-            </div>
-        </div>
-    </fieldset>
-
-        <div class="row">
-            <div class="col-md-6">
-                @Html.ActionLink("Cancel", "Index", "Home", null, new { @class = "btn btn-default btn-lg btn-block" })
-            </div>
-            <div class="col-md-6">
-                <input type="submit" class="btn btn-success btn-lg btn-block" value="Register" />
-            </div>
-        </div>
-
-
-
-    }
-</div>
+    </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
