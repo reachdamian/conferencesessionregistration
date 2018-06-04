@@ -21,7 +21,7 @@ namespace cjcsessionapp.Models
         public ApplicationUser()
         {
             SessionDelegates = new List<SessionDelegate>();
-            Registrations = new List<Registered>();
+            Registrations = new List<Registered>();            
         }
 
         public string FirstName { get; set; }
@@ -37,7 +37,5 @@ namespace cjcsessionapp.Models
         public virtual List<Registered> Registrations { get; set; }
 
         public IEnumerable<SelectListItem> RolesList { get; set; }        
-    }
-
-    
+    }    
 }

@@ -140,7 +140,7 @@ namespace cjcsessionapp.Controllers
             return View(sessionDelegate);
         }
 
-        // GET: SessionDelegates/Delete/5
+        [CustAuthFilter(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -156,7 +156,8 @@ namespace cjcsessionapp.Controllers
             }
             return View(sessionDelegate);
         }
-        
+
+        [CustAuthFilter(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -218,6 +219,7 @@ namespace cjcsessionapp.Controllers
             return View(sessionDelegate);
         }
 
+        [CustAuthFilter(Roles = "Admin")]
         [HttpPost, ActionName("CancelRegistration")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ConfirmCancelRegistration(int id)

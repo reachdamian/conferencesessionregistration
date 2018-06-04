@@ -11,7 +11,7 @@ using cjcsessionapp.Models;
 
 namespace cjcsessionapp.Controllers
 {
-    [CustAuthFilter(Roles = "Admin, User")]
+    [CustAuthFilter(Roles = "Admin, Registrar")]
     public class InstitutionsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -86,6 +86,7 @@ namespace cjcsessionapp.Controllers
             return View(institution);
         }
 
+        [CustAuthFilter(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -99,7 +100,8 @@ namespace cjcsessionapp.Controllers
             }
             return View(institution);
         }
-        
+
+        [CustAuthFilter(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

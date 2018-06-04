@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<cjcsessionapp.Models.ApplicationUser>
 @{
-    ViewBag.Title = "Users";
+    ViewBag.Title = "Users";       
 }
 <div class="fresh-table">
     <div class="toolbar">
-       
+
     </div>
     @if (TempData["AccountLocked"] != null)
     {
@@ -31,8 +31,7 @@
                 <th>Name</th>
                 <th>Locked out Until</th>
                 <th>Access Failed Count</th>
-                <th>Email</th>
-                <th>Roles</th>
+                <th>Email</th>                
                 <th></th>
             </tr>
         </thead>
@@ -51,16 +50,10 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @foreach (var m in item.Roles.ToList())
-                        {
-                            
-                        }                        
-                    </td>
+                    </td>                    
                     <td>
                         @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fa fa-pencil primary" })
-                        
+
                     </td>
                 </tr>
             }
