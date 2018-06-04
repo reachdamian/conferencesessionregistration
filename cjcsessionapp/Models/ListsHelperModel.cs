@@ -48,7 +48,10 @@ namespace cjcsessionapp.Models
                 new SelectListItem() {Text = "Miss", Value="Miss", },
                 new SelectListItem() {Text = "Ms.", Value = "Ms."},
                 new SelectListItem() {Text = "Dr.", Value = "Dr."},
-                new SelectListItem() {Text = "Pastor", Value = "Pastor"}
+                new SelectListItem() {Text = "Most Hon.", Value = "Most Hon."},
+                new SelectListItem() {Text = "Hon.", Value = "Hon."},
+                new SelectListItem() {Text = "Hon. Sir", Value = "Hon. Sir"},
+                new SelectListItem() {Text = "Pastor", Value = "Pastor"}                
             };
             return titles;
         }

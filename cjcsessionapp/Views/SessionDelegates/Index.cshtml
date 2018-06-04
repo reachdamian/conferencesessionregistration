@@ -47,7 +47,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.DisplayFor(modelItem => item.NameTitle)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
@@ -118,7 +118,7 @@
 
             var oTable = table.dataTable({
                 "order": [
-                    [0, 'asc']
+                    [2, 'asc']
                 ],
 
                 "lengthMenu": [

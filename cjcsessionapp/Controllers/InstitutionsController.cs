@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -16,7 +18,8 @@ namespace cjcsessionapp.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Institutions.ToList());
+            List<Institution> list = db.Institutions.OrderBy(v => v.Name).ToList();
+            return View(list);
         }
         
         public ActionResult Details(int? id)

@@ -17,13 +17,13 @@ namespace cjcsessionapp.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
-            context.SessionDelegates.AddOrUpdate(x => x.Id,
-                new SessionDelegate() { FirstName = "Damian", LastName = "Chambers", DelegateType = "Regular", InstitutionId = 1, DateAdded = DateTime.Now },
-                new SessionDelegate() { FirstName = "John", LastName = "Brown", DelegateType = "Regular", InstitutionId = 1, DateAdded = DateTime.Now },
-                new SessionDelegate() { FirstName = "Mary", LastName = "Jane", DelegateType = "Regular", InstitutionId = 2, DateAdded = DateTime.Now }
+            context.SessionDelegates.AddOrUpdate(x => x.FirstName,
+                new SessionDelegate() { FirstName = "Damian", LastName = "Chambers", DelegateType = "Regular", DateAdded = DateTime.Now },
+                new SessionDelegate() { FirstName = "John", LastName = "Brown", DelegateType = "Regular",  DateAdded = DateTime.Now },
+                new SessionDelegate() { FirstName = "Mary", LastName = "Jane", DelegateType = "Regular", DateAdded = DateTime.Now }
                 );
 
-            context.Institutions.AddOrUpdate(c => c.Id,
+            context.Institutions.AddOrUpdate(c => c.Name,
                 new Institution() { Name = "Spanish Town", NumberOfDelegatesAssigned = 5 },
                 new Institution() { Name = "Mandeville", NumberOfDelegatesAssigned = 4 });
 

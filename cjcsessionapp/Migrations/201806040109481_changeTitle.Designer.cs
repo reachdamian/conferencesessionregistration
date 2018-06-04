@@ -7,18 +7,18 @@ namespace cjcsessionapp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class reverted : IMigrationMetadata
+    public sealed partial class changeTitle : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(reverted));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(changeTitle));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805241949182_reverted"; }
+            get { return "201806040109481_changeTitle"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return null; }
+            get { return Resources.GetString("Source"); }
         }
         
         string IMigrationMetadata.Target

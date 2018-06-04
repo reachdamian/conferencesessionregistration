@@ -16,9 +16,9 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="row">
                 <div class="col-md-2">
-                    @Html.LabelFor(model => model.Title)
-                    @Html.DropDownListFor(model => model.Title, ListsHelperModel.GetNameTitles(), "Select Title", new { @class = "form-control required" })
-                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.NameTitle)
+                    @Html.DropDownListFor(model => model.NameTitle, ListsHelperModel.GetNameTitles(), "Select Title", new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.NameTitle, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-5">
                     @Html.LabelFor(model => model.FirstName)

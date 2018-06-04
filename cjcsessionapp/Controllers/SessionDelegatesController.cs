@@ -82,13 +82,13 @@ namespace cjcsessionapp.Controllers
         // GET: SessionDelegates/Create
         public ActionResult Create()
         {
-            ViewBag.InstitutionList = new SelectList(db.Institutions, "Id", "Name").ToList();
+            ViewBag.InstitutionList = new SelectList(db.Institutions.OrderBy(v=>v.Name), "Id", "Name").ToList();
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,Title,InstitutionId,Address,Email,AgeGroup,MartialStatus,Gender,Telephone,RequireHousing,EmergencyContactName,EmergencyContactPhone,DelegateType,Allergies,Asthma,Diabetes,Vegetarian,HighBloodPressure,BronchialDisorder")] SessionDelegateViewModel sessionDelegateViewModel)
+        public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,NameTitle,InstitutionId,Address,Email,AgeGroup,MartialStatus,Gender,Telephone,RequireHousing,EmergencyContactName,EmergencyContactPhone,DelegateType,Allergies,Asthma,Diabetes,Vegetarian,HighBloodPressure,BronchialDisorder")] SessionDelegateViewModel sessionDelegateViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -119,14 +119,14 @@ namespace cjcsessionapp.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.InstitutionList = new SelectList(db.Institutions, "Id", "Name").ToList();
+            ViewBag.InstitutionList = new SelectList(db.Institutions.OrderBy(v => v.Name), "Id", "Name").ToList();
             return View(sessionDelegate);
         }
 
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,FirstName,LastName,Title,DateAdded,InstitutionId,Address,Email,AgeGroup,MartialStatus,Gender,Telephone,RequireHousing,EmergencyContactName,EmergencyContactPhone,DelegateType,Allergies,Asthma,Diabetes,Vegetarian,HighBloodPressure,BronchialDisorder")] SessionDelegate sessionDelegate)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,FirstName,LastName,NameTitle,DateAdded,InstitutionId,Address,Email,AgeGroup,MartialStatus,Gender,Telephone,RequireHousing,EmergencyContactName,EmergencyContactPhone,DelegateType,Allergies,Asthma,Diabetes,Vegetarian,HighBloodPressure,BronchialDisorder")] SessionDelegate sessionDelegate)
         {
             if (ModelState.IsValid)
             {
@@ -249,7 +249,7 @@ namespace cjcsessionapp.Controllers
                 {
                     SessionDelegate newSessionDelegate = new SessionDelegate()
                     {
-                        Title = value[0],
+                        NameTitle = value[0],
                         FirstName = value[1],
                         LastName = value[2],
                         InstitutionId = Convert.ToInt32(value[3]),
