@@ -27,6 +27,8 @@ namespace cjcsessionapp.Models
         [MaxLength(50)]
         [DisplayName("Last Name")]
         public string LastName { get; set; }
+
+        [DisplayName("Title")]
         public string NameTitle { get; set; }        
         public string Address { get; set; }
         public string Email { get; set; }

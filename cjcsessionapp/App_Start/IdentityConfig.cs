@@ -24,7 +24,15 @@ namespace cjcsessionapp
             };
 
             smtpClient.EnableSsl = true;
-            return smtpClient.SendMailAsync(mailMessage);
+
+            try
+            {
+                return smtpClient.SendMailAsync(mailMessage);
+            }
+            catch (Exception)
+            {
+                return null;                
+            }            
         }
     }
 

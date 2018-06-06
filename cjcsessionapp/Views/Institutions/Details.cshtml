@@ -44,9 +44,9 @@
 
                         @foreach (var item in Model.SessionDelegate)
                         {
-                            <a href="@Url.Action("Edit","SessionDelegates", new { Id = item.Id})">
+                            
                                 <tr>
-                                    <td>@item.FullName</td>
+                                    <td><a href="@Url.Action("Edit","SessionDelegates", new { Id = item.Id})">@item.FullName</a></td>
                                     <td>@item.Institution.Name</td>
                                     <td>@item.DelegateType</td>
                                     @if (item.Registered.FirstOrDefault() != null)
@@ -58,7 +58,7 @@
                                         <td>No</td>
                                     }
                                 </tr>
-                            </a>
+                            
                         }
 
                     </table>

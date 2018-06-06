@@ -50,7 +50,7 @@ namespace cjcsessionapp.Controllers
             {
                 db.Institutions.Add(institution);
                 db.SaveChanges();
-                ViewBag.Success = "1 Institution Successfully added to list.";
+                TempData["Success"] = "1 Institution Successfully added to list.";
                 return RedirectToAction("Index");
             }
 
@@ -80,7 +80,7 @@ namespace cjcsessionapp.Controllers
                 db.Entry(institution).State = EntityState.Modified;
                 db.SaveChanges();
 
-                ViewBag.Success = "1 Institution Successfully updated.";
+                TempData["Success"] = "1 Institution Successfully updated.";
                 return RedirectToAction("Index");
             }
             return View(institution);
@@ -109,7 +109,7 @@ namespace cjcsessionapp.Controllers
             Institution institution = db.Institutions.Find(id);
             db.Institutions.Remove(institution);
             db.SaveChanges();
-            ViewBag.Success = "1 Institution Successfully deleted from list.";
+            TempData["Success"] = "1 Institution Successfully deleted from list.";
             return RedirectToAction("Index");
         }
 
@@ -126,13 +126,12 @@ namespace cjcsessionapp.Controllers
             while (!stream.EndOfStream)
             {
                 var line = stream.ReadLine();
-                var value = line.Split(',');
-                
+                var value = line.Split(',');                
 
                 Institution newInstitution = new Institution()
                 {
                     Name = value[0],
-                    NumberOfDelegatesAssigned = 1 // needs to be changed to Convert.ToInt32(value[1]) 
+                    NumberOfDelegatesAssigned =Convert.ToInt32(value[1]) // needs to be changed to Convert.ToInt32(value[1]) 
                 };
 
                 db.Institutions.Add(newInstitution);
@@ -140,7 +139,7 @@ namespace cjcsessionapp.Controllers
                 counter += 1;
             }
 
-            ViewBag.Success = counter + " Institutions were successfully added.";
+            TempData["Success"] = counter + " Institutions were successfully added.";
             return RedirectToAction("Index");
         }
 

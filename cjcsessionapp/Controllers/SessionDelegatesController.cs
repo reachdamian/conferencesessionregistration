@@ -186,7 +186,19 @@ namespace cjcsessionapp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ConfirmRegistration(int id)
         {
+            int NumberOfDelegatesAssigned = 0;
+            int NumberOfDelegatesRegistered = 0;
+
             SessionDelegate sessionDelegate = await db.SessionDelegates.Include(a=>a.Registered).FirstOrDefaultAsync(a=>a.Id == id);
+            NumberOfDelegatesAssigned = sessionDelegate.Institution.NumberOfDelegatesAssigned;
+
+            NumberOfDelegatesRegistered = await db.Registered.CountAsync(a => a.SessionDelegate.InstitutionId == sessionDelegate.InstitutionId);
+
+            if (NumberOfDelegatesRegistered >= NumberOfDelegatesAssigned)
+            {                
+                TempData["Error"] = sessionDelegate.Institution.Name + " has reached the limit for number of delegates.";
+                return RedirectToAction("Index");
+            }
 
             Registered NewRegistration = new Registered() {  SessionDelegateId = id, ApplicationUserId =User.Identity.GetUserId(), DateAndTime = DateTime.Now};
 
@@ -265,7 +277,7 @@ namespace cjcsessionapp.Controllers
                 }
             }
 
-            ViewBag.Success = counter + " SessionDelegates were successfully added.";
+            TempData["Success"] = counter + " SessionDelegates were successfully added.";
             return RedirectToAction("Index");
         }
 

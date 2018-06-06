@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.AgeGroup)
-                    @Html.TextBoxFor(model => model.AgeGroup, new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.AgeGroup, ListsHelperModel.AgeGroup(), "Select Age Group", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.AgeGroup, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-4">
